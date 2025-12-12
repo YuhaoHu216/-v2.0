@@ -12,14 +12,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@Slf4j //便于生成日志
-@RestController//处理http请求以及返回json格式数据
-public class UserController {
+@Slf4j
+@RestController
+@RequestMapping("/readers")
+public class ReaderController {
     @Autowired
     private UserService userService;
 
     //分页查询用户信息
-    @GetMapping("/users")
+    @GetMapping("/page/list")
     public Result page(@RequestParam(defaultValue = "1") Integer page,      //设定默认值
                        @RequestParam(defaultValue = "5") Integer pageSize,
                        Integer id){
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     //根据id删除用户
-    @DeleteMapping("/users")
+    @DeleteMapping()
     public Result delete(Integer id){
         log.info("删除用户,id:{}",id);
         userService.delete(id);
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     //用户借阅书籍
-    @PostMapping("/users")
+    @PostMapping()
     public Result borrow(String name){
         log.info("借书,书名:{}",name);
         userService.borrow(name);
@@ -46,7 +47,7 @@ public class UserController {
     }
 
     //用户归还书籍
-    @PutMapping("/users")
+    @PutMapping()
     public Result drop(String name){
         log.info("还书,书名:{}",name);
         userService.drop(name);

@@ -8,15 +8,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j //便于生成日志
-@RestController//处理http请求以及返回json格式数据
+@Slf4j
+@RestController
+@RequestMapping("/books")
 public class BookController {
 
     @Autowired//注入书籍管理的service
     private BookService bookService;
 
     //分页查询书籍信息
-    @GetMapping("/books")
+    @GetMapping("/page/list")
     public Result page(@RequestParam(defaultValue = "1") Integer page,      //设定默认值
                        @RequestParam(defaultValue = "5") Integer pageSize,
                        String name){
@@ -37,7 +38,7 @@ public class BookController {
     }
 
     //新增书籍
-    @PostMapping("/books")
+    @PostMapping()
     public Result add(@RequestBody Book book){ //将数据以json格式封装
         log.info("新增书籍,book:{}",book);
         //调用service进行新增操作
@@ -46,7 +47,7 @@ public class BookController {
     }
 
     //删除书籍
-    @DeleteMapping("/books")
+    @DeleteMapping()
     public Result delete(String name){
         log.info("删除书籍,name:{}",name);
         //调用service进行删除操作
@@ -55,7 +56,7 @@ public class BookController {
     }
 
     //根据id查询书籍(查询回显)
-    @GetMapping("/books/{id}")
+    @GetMapping("/{id}")
     public Result getById(@PathVariable Integer id){
         log.info("根据id查询书籍信息,id:{}",id);
         Book book = bookService.getById(id);
@@ -63,7 +64,7 @@ public class BookController {
     }
 
     //更改书籍信息
-    @PutMapping("/books")
+    @PutMapping()
     public Result update(@RequestBody Book book){
         log.info("更新书籍信息:{}",book);
         //调用service进行更改操作
