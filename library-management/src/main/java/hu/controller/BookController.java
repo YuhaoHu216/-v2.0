@@ -1,0 +1,74 @@
+package hu.controller;
+
+import hu.pojo.Book;
+import hu.pojo.PageBean;
+import hu.pojo.Result;
+import hu.service.BookService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@Slf4j //便于生成日志
+@RestController//处理http请求以及返回json格式数据
+public class BookController {
+
+    @Autowired//注入书籍管理的service
+    private BookService bookService;
+
+    //分页查询书籍信息
+    @GetMapping("/books")
+    public Result page(@RequestParam(defaultValue = "1") Integer page,      //设定默认值
+                       @RequestParam(defaultValue = "5") Integer pageSize,
+                       String name){
+        log.info("分页查询,参数:{},{},{}",page,pageSize,name);
+        //调用service进行分页查询操作
+        PageBean pageBean = bookService.page(page,pageSize,name);
+        return Result.success(pageBean);
+    }
+
+    //分页显示已借书籍,并用书名查询
+    @PatchMapping("/users")
+    public Result borrow(@RequestParam(defaultValue = "1") Integer page,      //设定默认值
+                       @RequestParam(defaultValue = "5") Integer pageSize,
+                       String name){
+        log.info("书名查询,分页显示已借书籍:{}",name);
+        PageBean pageBean = bookService.borrow(page,pageSize,name);
+        return Result.success(pageBean);
+    }
+
+    //新增书籍
+    @PostMapping("/books")
+    public Result add(@RequestBody Book book){ //将数据以json格式封装
+        log.info("新增书籍,book:{}",book);
+        //调用service进行新增操作
+        bookService.add(book);
+        return Result.success();
+    }
+
+    //删除书籍
+    @DeleteMapping("/books")
+    public Result delete(String name){
+        log.info("删除书籍,name:{}",name);
+        //调用service进行删除操作
+        bookService.delete(name);
+        return Result.success();
+    }
+
+    //根据id查询书籍(查询回显)
+    @GetMapping("/books/{id}")
+    public Result getById(@PathVariable Integer id){
+        log.info("根据id查询书籍信息,id:{}",id);
+        Book book = bookService.getById(id);
+        return Result.success(book);
+    }
+
+    //更改书籍信息
+    @PutMapping("/books")
+    public Result update(@RequestBody Book book){
+        log.info("更新书籍信息:{}",book);
+        //调用service进行更改操作
+        bookService.update(book);
+        return Result.success();
+
+    }
+}

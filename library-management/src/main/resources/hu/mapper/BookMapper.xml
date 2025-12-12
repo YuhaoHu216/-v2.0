@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hu.mapper.BookMapper">
+
+<!--    更新书籍-->
+    <update id="update">
+        update book
+        <set>
+            update_time = #{updateTime},
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="press != null and press != ''">
+                press = #{press},
+            </if>
+            <if test="img != null and img != ''">
+                img = #{img}
+            </if>
+            where name = #{name}
+        </set>
+    </update>
+
+</mapper>
