@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/books")
+@CrossOrigin(origins = "*")
 public class BookController {
 
     @Resource
