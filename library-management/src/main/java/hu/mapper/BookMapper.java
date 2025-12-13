@@ -17,17 +17,21 @@ public interface BookMapper {
     List<Book> list(BookQuery  query);
 
 
-    //新增书籍
-    @Insert("insert into book(img, name, press, add_time, update_time, borrowed) VALUES (#{img},#{name},#{press},#{addTime},#{updateTime},0)")
-    @Options(useGeneratedKeys = true,keyProperty = "id",keyColumn = "id")// 自动将生成的主键值赋值给book对象的id属性
+    /**
+     * 新增数据
+     * @param book 新增书籍信息
+     */
+    @Insert("insert into books(isbn,title,author,publisher,publish_date,category,total_copies,available_copies,location,image) " +
+            "VALUES (#{isbn},#{title},#{author},#{publisher},#{publishDate},#{category},#{totalCopies},#{totalCopies},#{location},#{image})")
+    @Options(useGeneratedKeys = true,keyProperty = "bookId",keyColumn = "book_id")
     void insert(Book book);
 
     //删除书籍
-    @Delete("delete from book where name = #{name}")
+    @Delete("delete from books where name = #{name}")
     void delete(String name);
 
     //根据id查询书籍
-    @Select("select * from book where id = #{id}")
+    @Select("select * from books where id = #{id}")
     Book getById(Integer id);
 
     //更新书籍
