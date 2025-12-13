@@ -27,12 +27,12 @@ public interface BookMapper {
     void insert(Book book);
 
     //删除书籍
-    @Delete("delete from books where name = #{name}")
+    @Delete("delete from books where book_id = #{bookId}")
     void delete(String name);
 
     //根据id查询书籍
-    @Select("select * from books where id = #{id}")
-    Book getById(Integer id);
+    @Select("select * from books where book_id = #{bookId}")
+    Book getById(Integer bookId);
 
     //更新书籍
     void update(Book book);

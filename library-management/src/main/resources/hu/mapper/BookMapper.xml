@@ -7,20 +7,43 @@
 
 <!--    更新书籍-->
     <update id="update">
-        update book
+        update books
         <set>
-            update_time = #{updateTime},
-            <if test="name != null and name != ''">
-                name = #{name},
+            <if test="isbn != null and isbn != ''">
+                isbn = #{isbn},
             </if>
-            <if test="press != null and press != ''">
-                press = #{press},
+            <if test="title != null and title != ''">
+                title = #{title},
             </if>
-            <if test="img != null and img != ''">
-                img = #{img}
+            <if test="author != null and author != ''">
+                author = #{author},
             </if>
-            where name = #{name}
+            <if test="publisher != null and publisher != ''">
+                publisher = #{publisher},
+            </if>
+            <if test="publishDate != null">
+                publish_date = #{publishDate},
+            </if>
+            <if test="category != null and category != ''">
+                category = #{category},
+            </if>
+            <if test="totalCopies != null">
+                total_copies = #{totalCopies},
+            </if>
+            <if test="availableCopies != null">
+                available_copies = #{availableCopies},
+            </if>
+            <if test="location != null and location != ''">
+                location = #{location},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status}
+            </if>
         </set>
+        where book_id = #{bookId}
     </update>
 
     <select id="list" resultType="hu.pojo.Book">

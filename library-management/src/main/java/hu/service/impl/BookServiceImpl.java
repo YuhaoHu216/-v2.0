@@ -48,8 +48,8 @@ public class BookServiceImpl implements BookService {
 
     //根据id查询书籍
     @Override
-    public Book getById(Integer id) {
-        return bookMapper.getById(id);
+    public Book getById(Integer bookId) {
+        return bookMapper.getById(bookId);
     }
 
     //更改书籍信息

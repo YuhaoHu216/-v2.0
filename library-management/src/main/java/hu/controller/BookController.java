@@ -37,18 +37,18 @@ public class BookController {
 
     //删除书籍 TODO 修改为批量删除
     @DeleteMapping()
-    public Result delete(String name){
-        log.info("删除书籍,name:{}",name);
+    public Result delete(String bookId){
+        log.info("删除书籍,name:{}",bookId);
         //调用service进行删除操作
-        bookService.delete(name);
+        bookService.delete(bookId);
         return Result.success();
     }
 
     //根据id查询书籍(查询回显)
-    @GetMapping("/{id}")
-    public Result getById(@PathVariable Integer id){
-        log.info("根据id查询书籍信息,id:{}",id);
-        Book book = bookService.getById(id);
+    @GetMapping("/{bookId}")
+    public Result getById(@PathVariable Integer bookId){
+        log.info("根据id查询书籍信息,id:{}",bookId);
+        Book book = bookService.getById(bookId);
         return Result.success(book);
     }
 

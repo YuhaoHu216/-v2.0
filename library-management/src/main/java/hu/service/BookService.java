@@ -18,7 +18,7 @@ public interface BookService {
     void delete(String name);
 
     //根据id查询书籍
-    Book getById(Integer id);
+    Book getById(Integer bookId);
 
     //更新书籍信息
     void update(Book book);
