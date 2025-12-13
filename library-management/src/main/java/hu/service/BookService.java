@@ -2,16 +2,14 @@ package hu.service;
 
 import hu.pojo.Book;
 import hu.pojo.PageBean;
+import hu.query.BookQuery;
 import org.springframework.stereotype.Service;
 
-@Service//表记服务类
+//@Service
 public interface BookService {
 
     //根据书名进行查询
-    PageBean page(Integer page, Integer pageSize, String name);
-
-    PageBean borrow(Integer page, Integer pageSize, String name);
-
+    PageBean page(BookQuery bookQuery);
 
     //新增书籍
     void add(Book book);

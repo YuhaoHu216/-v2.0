@@ -3,6 +3,8 @@ package hu.controller;
 import hu.pojo.Book;
 import hu.pojo.PageBean;
 import hu.pojo.Result;
+import hu.query.BookQuery;
+import jakarta.annotation.Resource;
 import hu.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,40 +15,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/books")
 public class BookController {
 
-    @Autowired//注入书籍管理的service
+    @Resource
     private BookService bookService;
 
     //分页查询书籍信息
-    @GetMapping("/page/list")
-    public Result page(@RequestParam(defaultValue = "1") Integer page,      //设定默认值
-                       @RequestParam(defaultValue = "5") Integer pageSize,
-                       String name){
-        log.info("分页查询,参数:{},{},{}",page,pageSize,name);
+    @PostMapping("/page")
+    public Result page(@RequestBody BookQuery query){
+        log.info("分页查询,参数:{},{},{}",query.getPage(),query.getPageSize(),query.getTitle());
         //调用service进行分页查询操作
-        PageBean pageBean = bookService.page(page,pageSize,name);
-        return Result.success(pageBean);
-    }
-
-    //分页显示已借书籍,并用书名查询
-    @PatchMapping("/users")
-    public Result borrow(@RequestParam(defaultValue = "1") Integer page,      //设定默认值
-                       @RequestParam(defaultValue = "5") Integer pageSize,
-                       String name){
-        log.info("书名查询,分页显示已借书籍:{}",name);
-        PageBean pageBean = bookService.borrow(page,pageSize,name);
+        PageBean pageBean = bookService.page(query);
         return Result.success(pageBean);
     }
 
     //新增书籍
     @PostMapping()
-    public Result add(@RequestBody Book book){ //将数据以json格式封装
+    public Result add(@RequestBody Book book){
         log.info("新增书籍,book:{}",book);
-        //调用service进行新增操作
         bookService.add(book);
         return Result.success();
     }
 
-    //删除书籍
+    //删除书籍 TODO 修改为批量删除
     @DeleteMapping()
     public Result delete(String name){
         log.info("删除书籍,name:{}",name);

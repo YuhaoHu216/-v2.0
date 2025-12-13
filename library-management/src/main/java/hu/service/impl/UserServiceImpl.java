@@ -13,7 +13,7 @@ import java.util.List;
 //实现类，用来实现方法
 
 @Service//标记服务类
-public class UserServiceIpml implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;

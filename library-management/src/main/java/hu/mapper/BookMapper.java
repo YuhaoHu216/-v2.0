@@ -1,19 +1,20 @@
 package hu.mapper;
 
 import hu.pojo.Book;
+import hu.query.BookQuery;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
 @Mapper//表明这是持久层接口,将接口生成动态代理类
 public interface BookMapper {
-    //根据书名分页查询书籍
-    @Select("select * from book where name like concat('%',#{name},'%') order by update_time")
-    List<Book> list(String name);
 
-    //书名分页显示已借阅书籍
-    @Select("select * from book where name like concat('%',#{name},'%') and borrowed = 1")
-    List<Book> borrow(String name);
+    /**
+     * 分页查询书籍信息
+     * @param query 查询条件
+     * @return 书籍集合
+     */
+    List<Book> list(BookQuery  query);
 
 
     //新增书籍

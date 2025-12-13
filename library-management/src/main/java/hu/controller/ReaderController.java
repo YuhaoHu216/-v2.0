@@ -71,8 +71,8 @@ public class ReaderController {
         //登录成功,生成并下发令牌
         if (u != null){
             Map<String,Object> claims = new HashMap<>();
-            claims.put("id",u.getId());
-            claims.put("name",u.getName());
+            claims.put("id",u.getReaderId());
+            claims.put("name",u.getReadName());
 
             String jwt = JwtUtils.generateJwt(claims); //令牌包含用户信息
             return Result.success(jwt);

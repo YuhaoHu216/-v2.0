@@ -23,4 +23,19 @@
         </set>
     </update>
 
+    <select id="list" resultType="hu.pojo.Book">
+        select * from books
+        <where>
+            <if test="isbn != null and isbn != ''">isbn = #{isbn}</if>
+            <if test="bookId != null">and book_id = #{bookId}</if>
+            <if test="title != null and title != ''">and title like concat('%',#{title},'%')</if>
+            <if test="author != null and author != ''">and author like concat('%',#{author},'%')</if>
+            <if test="publisher != null and publisher != ''">and publisher like concat('%',#{publisher},'%')</if>
+            <if test="category != null and category != ''">and category like concat('%',#{category},'%')</if>
+            <if test="startDate != null and endDate != null">and publish_date between #{startDate} and #{endDate}</if>
+            <if test="availableCopies != null">and available_copies = #{availableCopies}</if>
+            <if test="status != null">and status = #{status}</if>
+        </where>
+    </select>
+
 </mapper>

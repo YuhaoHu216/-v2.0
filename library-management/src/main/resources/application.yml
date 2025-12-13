@@ -20,11 +20,4 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
 
-#配置阿里云OSS
-aliyun:
-  oss:
-    endpoint: https://oss-cn-beijing.aliyuncs.com
-    accessKeyId: LTAI5tA1nNWQj92yV9xzPL8e
-    accessKeySecret: cwxGMzgMkajlDNBVdyrotSjORpAG9i
-    bucketName: hyhstudy
 

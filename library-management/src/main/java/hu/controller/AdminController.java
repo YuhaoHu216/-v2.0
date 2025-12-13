@@ -31,8 +31,8 @@ public class AdminController {
         //登录成功,生成并下发令牌
         if (a != null){
             Map<String,Object> claims = new HashMap<>();
-            claims.put("id",a.getId());
-            claims.put("name",a.getName());
+            claims.put("id",a.getAdminId());
+            claims.put("name",a.getUsername());
 
             String jwt = JwtUtils.generateJwt(claims); //令牌包含管理员信息
             return Result.success(jwt);

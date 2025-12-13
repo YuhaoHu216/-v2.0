@@ -5,10 +5,9 @@ import hu.pojo.Admin;
 import hu.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-//实现类，用来实现方法
 
-@Service//标记服务类
-public class AdminServiceIpml implements AdminService{
+@Service
+public class AdminServiceImpl implements AdminService{
     @Autowired
     private AdminMapper adminMapper;
 

@@ -1,26 +1,26 @@
-package hu.pojo;
+package hu.query;
 
 import hu.enums.BookStatus;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-@Data//
-public class Book {
+/**
+ * @author hyh
+ * @since 2025-12-13
+ */
+@Data
+public class BookQuery {
     private String isbn;
-    private String image;
     private Integer bookId;
     private String title;
     private String author;
     private String publisher;
-    private LocalDate publishDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String category;
-    private Integer totalCopies;
     private Integer availableCopies;
-    private String location;
-    // 书籍状态 1:在管 0:借出
     private Integer status;
+    private Integer page = 1;
+    private Integer pageSize = 10;
 }
