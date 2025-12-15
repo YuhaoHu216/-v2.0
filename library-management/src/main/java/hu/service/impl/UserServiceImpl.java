@@ -43,8 +43,12 @@ public class UserServiceImpl implements UserService {
 
     //借阅书籍
     @Override
-    public void borrow(String name) {
-        userMapper.borrow(name);
+    public void borrow(Integer bookId) {
+        // 用户信息的更新
+
+        // 借阅表信息的更新
+
+        // 图书表信息的更新
     }
 
     //还书

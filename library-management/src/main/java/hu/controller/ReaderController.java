@@ -44,9 +44,9 @@ public class ReaderController {
 
     //用户借阅书籍
     @PostMapping()
-    public Result borrow(String name){
-        log.info("借书,书名:{}",name);
-        userService.borrow(name);
+    public Result borrow(Integer bookId){
+        log.info("借书,书id:{}",bookId);
+        userService.borrow(bookId);
         return Result.success();
     }
 

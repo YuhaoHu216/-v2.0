@@ -12,7 +12,7 @@ public interface UserService {
     void delete(Integer readerId);
 
     //借阅书籍
-    void borrow(String name);
+    void borrow(Integer bookId);
 
     //环书
     void drop(String name);
