@@ -9,7 +9,7 @@ public interface UserService {
     PageBean page(Integer page, Integer pageSize, Integer id);
 
     //根据id删除用户
-    void delete(Integer id);
+    void delete(Integer readerId);
 
     //借阅书籍
     void borrow(String name);

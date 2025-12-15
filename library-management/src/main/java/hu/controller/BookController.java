@@ -39,7 +39,7 @@ public class BookController {
     //删除书籍 TODO 修改为批量删除
     @DeleteMapping()
     public Result delete(String bookId){
-        log.info("删除书籍,name:{}",bookId);
+        log.info("删除书籍,bookId:{}",bookId);
         //调用service进行删除操作
         bookService.delete(bookId);
         return Result.success();

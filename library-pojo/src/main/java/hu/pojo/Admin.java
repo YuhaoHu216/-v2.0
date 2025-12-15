@@ -14,7 +14,7 @@ public class Admin {
     private String username;
     private String password_hash;
     private String realName;
-    private PermissionLevel permissionLevel;
+    private Integer permissionLevel;
     @DateTimeFormat(pattern = "YY-mm-DD HH:mm:ss")
     private LocalDateTime lastLogin;
 }

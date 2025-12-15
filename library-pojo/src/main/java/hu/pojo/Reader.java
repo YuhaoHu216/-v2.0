@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor//代替全参构造
 public class Reader {
     private Integer readerId;
-    private String readName;
-    private ReaderType readerType;
+    private String readerName;
+    private Integer readerType;
     private String department;
     private String phoneNumber;
-    private ReaderStatus status;
+    private Integer status;
     private Integer maxBorrowCount;
     private Integer currentBorrowCount;
+    private String password;
 }

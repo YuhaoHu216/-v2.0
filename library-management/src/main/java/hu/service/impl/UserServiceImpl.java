@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
 
     //根据id删除用户
     @Override
-    public void delete(Integer id) {
-        userMapper.delete(id);
+    public void delete(Integer readerId) {
+        userMapper.delete(readerId);
     }
 
     //借阅书籍

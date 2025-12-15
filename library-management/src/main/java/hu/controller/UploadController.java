@@ -38,15 +38,4 @@ public class UploadController {
         return Result.success("http://127.0.0.1:8080/images/" + newFileName);
     }
 
-//    @Autowired
-//    private AliOSSUtils aliOSSUtils;
-//
-//    @PostMapping("upload")
-//    public Result upload(MultipartFile image) throws Exception{
-//        log.info("文件上传，文件名:{}",image.getOriginalFilename());
-//        //调用阿里云OSS工具类进行文件上传
-//        String url = aliOSSUtils.upload(image);
-//        log.info("文件上传完成,文件访问的url:{}",url);
-//        return Result.success( url );
-//    }
 }

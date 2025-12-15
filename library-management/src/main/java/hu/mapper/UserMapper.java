@@ -7,25 +7,25 @@ import java.util.List;
 
 @Mapper//将接口生成动态代理类
 public interface UserMapper {
-    //将用户分页查询
-    @Select("select * from user where id = #{id}")
+    //用户分页查询
     List<Reader> list(Integer id);
 
     //删除用户
-    @Delete("delete from user where id = #{id}")
+    @Delete("delete from readers where reader_id = #{readerId}")
     void delete(Integer id);
 
     //借阅书籍
-    @Update("update book set borrowed = 1 where name = #{name}")
+    @Update("update books set borrowed = 1 where name = #{name}")
     void borrow(String name);
 
     //还书
-    @Update("update book set borrowed = 0 where name = #{name}")
+    @Update("update books set borrowed = 0 where name = #{name}")
     void drop(String name);
 
     //用户注册
-    @Options(useGeneratedKeys = true,keyProperty = "id",keyColumn = "id")
-    @Insert("insert into user(name,password) values (#{name},#{password})")
+    @Options(useGeneratedKeys = true,keyProperty = "readerId",keyColumn = "reader_id")
+    @Insert("insert into readers(reader_name,password,reader_type,department,phone_number) " +
+            "values (#{readerName},#{password},#{readerType},#{department},#{phoneNumber})")
     void rigister(Reader reader);
 
     //查找用户

@@ -23,7 +23,7 @@ public class ReaderController {
     @GetMapping("/page/list")
     public Result page(@RequestParam(defaultValue = "1") Integer page,      //设定默认值
                        @RequestParam(defaultValue = "5") Integer pageSize,
-                       Integer id){
+                       @RequestParam("readerId") Integer id){
         log.info("分页查询,参数:{},{},{}",page,pageSize,id);
         //调用service进行分页查询操作
         PageBean pageBean = userService.page(page,pageSize,id);
@@ -32,9 +32,9 @@ public class ReaderController {
 
     //根据id删除用户
     @DeleteMapping()
-    public Result delete(Integer id){
-        log.info("删除用户,id:{}",id);
-        userService.delete(id);
+    public Result delete(Integer readerId){
+        log.info("删除用户,id:{}",readerId);
+        userService.delete(readerId);
         return Result.success();
     }
 
@@ -72,7 +72,7 @@ public class ReaderController {
         if (u != null){
             Map<String,Object> claims = new HashMap<>();
             claims.put("id",u.getReaderId());
-            claims.put("name",u.getReadName());
+            claims.put("name",u.getReaderName());
 
             String jwt = JwtUtils.generateJwt(claims); //令牌包含用户信息
             return Result.success(jwt);

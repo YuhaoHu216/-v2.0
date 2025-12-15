@@ -5,4 +5,12 @@
 
 <mapper namespace="hu.mapper.UserMapper">
 
+    <select id="list" resultType="hu.pojo.Reader">
+        select * from readers
+        <where>
+            <if test="readerId != null">
+                reader_id = #{readId}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -16,6 +16,6 @@ public class BorrowRecords {
     private LocalDate dueDate;
     private LocalDate returnTime;
     private Integer renewCount;
-    private BorrowRecordsStatus status;
+    private Integer status;
     private BigDecimal fineAmount;
 }
