@@ -24,11 +24,11 @@ public interface UserMapper {
 
     //用户注册
     @Options(useGeneratedKeys = true,keyProperty = "readerId",keyColumn = "reader_id")
-    @Insert("insert into readers(reader_name,password,reader_type,department,phone_number) " +
-            "values (#{readerName},#{password},#{readerType},#{department},#{phoneNumber})")
+    @Insert("insert into readers(reader_name,password,reader_type,department,phone_number,account) " +
+            "values (#{readerName},#{password},#{readerType},#{department},#{phoneNumber},#{account})")
     void rigister(Reader reader);
 
     //查找用户
-    @Select("select * from user where name = #{name} and password = #{password}")
+    @Select("select * from readers where account = #{account} and password = #{password}")
     Reader getByUsernameAndPassword(Reader reader);
 }

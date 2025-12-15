@@ -19,4 +19,5 @@ public class Reader {
     private Integer maxBorrowCount;
     private Integer currentBorrowCount;
     private String password;
+    private String account;
 }

@@ -5,6 +5,8 @@ import hu.pojo.Result;
 import hu.pojo.Reader;
 import hu.service.UserService;
 import hu.utils.JwtUtils;
+import hu.utils.ReaderHolder;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,8 @@ import java.util.Map;
 public class ReaderController {
     @Autowired
     private UserService userService;
+    @Resource
+    private ReaderHolder readerHolder;
 
     //分页查询用户信息
     @GetMapping("/page/list")
@@ -71,12 +75,15 @@ public class ReaderController {
         //登录成功,生成并下发令牌
         if (u != null){
             Map<String,Object> claims = new HashMap<>();
-            claims.put("id",u.getReaderId());
-            claims.put("name",u.getReaderName());
+            claims.put("readerId",u.getReaderId());
+            claims.put("readerName",u.getReaderName());
 
             String jwt = JwtUtils.generateJwt(claims); //令牌包含用户信息
             return Result.success(jwt);
         }
+
+        // 将用户信息存入theadLocal
+        readerHolder.setReader(u);
         //登录失败返回错误信息
         return Result.error("用户名或密码错误");
     }
