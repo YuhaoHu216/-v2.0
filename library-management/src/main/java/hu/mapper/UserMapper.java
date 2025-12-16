@@ -19,8 +19,8 @@ public interface UserMapper {
     void borrow(Integer readerId);
 
     //还书
-    @Update("update books set borrowed = 0 where name = #{name}")
-    void drop(String name);
+    @Update("update readers set current_borrow_count = current_borrow_count - 1 where reader_id = #{readerId}")
+    void drop(Integer readerId);
 
     //用户注册
     @Options(useGeneratedKeys = true,keyProperty = "readerId",keyColumn = "reader_id")

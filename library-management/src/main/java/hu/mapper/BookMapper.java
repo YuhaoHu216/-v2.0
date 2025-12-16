@@ -37,5 +37,7 @@ public interface BookMapper {
     //更新书籍
     void update(Book book);
 
-
+    // 归还书籍
+    @Update("update books set available_copies = available_copies + 1 where book_id = #{bookId}")
+    void drop(Integer bookId);
 }

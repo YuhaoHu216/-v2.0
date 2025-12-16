@@ -16,7 +16,7 @@ public interface UserService {
     Result borrow(Integer bookId);
 
     //环书
-    void drop(String name);
+    Result drop(Integer bookId);
 
     //用户注册
     void register(Reader reader);

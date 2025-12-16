@@ -50,11 +50,10 @@ public class ReaderController {
     }
 
     //用户归还书籍
-    @PutMapping()
-    public Result drop(String name){
-        log.info("还书,书名:{}",name);
-        userService.drop(name);
-        return Result.success();
+    @PutMapping("/return")
+    public Result drop(Integer bookId){
+        log.info("还书,书id:{}",bookId);
+        return userService.drop(bookId);
     }
 
     //用户注册

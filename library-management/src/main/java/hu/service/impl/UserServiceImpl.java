@@ -85,8 +85,20 @@ public class UserServiceImpl implements UserService {
 
     //还书
     @Override
-    public void drop(String name) {
-        userMapper.drop(name);
+    @Transactional
+    public Result drop(Integer bookId) {
+        // 获取登录用户信息
+        Reader reader = (Reader) readerHolder.getReader();
+        Reader r = userMapper.getById(reader);
+        // 读者信息更新
+        r.setCurrentBorrowCount(r.getCurrentBorrowCount() - 1);
+        userMapper.drop(r.getReaderId());
+        // 借阅表信息更新
+        LocalDate returnDate = LocalDate.now();
+        borrowRecordsMapper.updateStatus(bookId,r.getReaderId(),returnDate);
+        // 图书表信息更新
+        bookMapper.drop(bookId);
+        return Result.success();
     }
 
     @Override
