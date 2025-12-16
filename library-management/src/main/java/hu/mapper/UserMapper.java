@@ -15,8 +15,8 @@ public interface UserMapper {
     void delete(Integer id);
 
     //借阅书籍
-    @Update("update books set borrowed = 1 where name = #{name}")
-    void borrow(String name);
+    @Update("update readers set current_borrow_count = current_borrow_count + 1 where reader_id = #{readerId}")
+    void borrow(Integer readerId);
 
     //还书
     @Update("update books set borrowed = 0 where name = #{name}")
@@ -31,4 +31,7 @@ public interface UserMapper {
     //查找用户
     @Select("select * from readers where account = #{account} and password = #{password}")
     Reader getByUsernameAndPassword(Reader reader);
+
+    @Select("select * from readers where reader_id = #{readerId}")
+    Reader getById(Reader reader);
 }

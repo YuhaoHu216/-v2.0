@@ -2,6 +2,7 @@ package hu.service;
 
 import hu.pojo.PageBean;
 import hu.pojo.Reader;
+import hu.pojo.Result;
 import org.springframework.stereotype.Service;
 @Service//标记服务类
 public interface UserService {
@@ -12,7 +13,7 @@ public interface UserService {
     void delete(Integer readerId);
 
     //借阅书籍
-    void borrow(Integer bookId);
+    Result borrow(Integer bookId);
 
     //环书
     void drop(String name);

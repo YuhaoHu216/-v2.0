@@ -43,11 +43,10 @@ public class ReaderController {
     }
 
     //用户借阅书籍
-    @PostMapping()
+    @PostMapping("/borrow")
     public Result borrow(Integer bookId){
         log.info("借书,书id:{}",bookId);
-        userService.borrow(bookId);
-        return Result.success();
+        return userService.borrow(bookId);
     }
 
     //用户归还书籍
@@ -81,9 +80,6 @@ public class ReaderController {
             String jwt = JwtUtils.generateJwt(claims); //令牌包含用户信息
             return Result.success(jwt);
         }
-
-        // 将用户信息存入theadLocal
-        readerHolder.setReader(u);
         //登录失败返回错误信息
         return Result.error("用户名或密码错误");
     }
