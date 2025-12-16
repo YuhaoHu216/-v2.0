@@ -20,8 +20,6 @@ import java.util.Map;
 public class ReaderController {
     @Autowired
     private UserService userService;
-    @Resource
-    private ReaderHolder readerHolder;
 
     //分页查询用户信息
     @GetMapping("/page/list")
