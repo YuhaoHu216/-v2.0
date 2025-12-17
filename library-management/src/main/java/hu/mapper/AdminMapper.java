@@ -1,12 +1,20 @@
 package hu.mapper;
 
 import hu.pojo.Admin;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper//将接口生成动态代理类
 public interface AdminMapper {
     //管理员登录
-    @Select("select * from admin where name = #{name} and password = #{password}")
-    Admin getByAdminnameAndPassword(Admin admin);
+    @Select("select * from admin where username = #{username} and password_hash = #{password}")
+    Admin getByAdminNameAndPassword(Admin admin);
+
+    @Insert("insert into admin(username,password_hash,real_name) values(#{username},#{password},#{realName})")
+    int insert(Admin admin);
+
+    @Delete("delete from admin where admin_id = #{adminId}")
+    int delete(Integer adminId);
 }

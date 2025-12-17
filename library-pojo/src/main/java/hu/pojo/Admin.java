@@ -6,15 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 public class Admin {
     private Integer adminId;
     private String username;
-    private String password_hash;
+    private String password;
     private String realName;
-    private Integer permissionLevel;
-    @DateTimeFormat(pattern = "YY-mm-DD HH:mm:ss")
-    private LocalDateTime lastLogin;
+    private LocalDate lastLogin;
 }
