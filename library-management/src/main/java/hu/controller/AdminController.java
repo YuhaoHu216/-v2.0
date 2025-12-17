@@ -5,6 +5,8 @@ import hu.pojo.Admin;
 import hu.pojo.Result;
 import hu.service.AdminService;
 import hu.utils.JwtUtils;
+import hu.utils.ReaderHolder;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,9 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+
+    @Resource
+    private ReaderHolder readerHolder;
     //管理员登录
     @GetMapping("/login")
     public Result login(@RequestBody Admin admin){
@@ -28,9 +33,9 @@ public class AdminController {
         //登录成功,生成并下发令牌
         if (a != null){
             Map<String,Object> claims = new HashMap<>();
-            claims.put("id",a.getAdminId());
-            claims.put("name",a.getUsername());
-
+            claims.put("adminId",a.getAdminId());
+            claims.put("username",a.getUsername());
+            claims.put("adminType",a.getAdminType());
             String jwt = JwtUtils.generateJwt(claims); //令牌包含管理员信息
             return Result.success(jwt);
         }
@@ -38,7 +43,11 @@ public class AdminController {
         return Result.error("用户名或密码错误");
     }
 
-
+    // 根据token获取当前管理员信息
+    @GetMapping("/me")
+    public Result me(){
+        return Result.success(readerHolder.getReader());
+    }
 
     // 系统管理员新增管理员
     @PostMapping("/add")

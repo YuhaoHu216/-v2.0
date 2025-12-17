@@ -15,5 +15,6 @@ public class Admin {
     private String username;
     private String password;
     private String realName;
+    private Integer AdminType;
     private LocalDate lastLogin;
 }

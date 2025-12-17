@@ -1,5 +1,6 @@
 package hu.interceptor;
 
+import hu.pojo.Admin;
 import hu.pojo.Reader;
 import hu.utils.JwtUtils;
 import hu.utils.ReaderHolder;
@@ -27,12 +28,19 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
 
         Claims claims = JwtUtils.parseJwt(token);
-        Reader reader = new Reader();
-        reader.setReaderId((Integer) claims.get("readerId"));
-        reader.setReaderName((String) claims.get("readerName"));
-
-        // 在“当前请求线程”中放入 ThreadLocal
-        readerHolder.setReader(reader);
+        if(claims.containsKey("readerId")){
+            Reader reader = new Reader();
+            reader.setReaderId((Integer) claims.get("readerId"));
+            reader.setReaderName((String) claims.get("readerName"));
+            // 在“当前请求线程”中放入 ThreadLocal
+            readerHolder.setReader(reader);
+        }else if (claims.containsKey("adminId")){
+            Admin admin = new Admin();
+            admin.setAdminId((Integer) claims.get("adminId"));
+            admin.setUsername((String) claims.get("username"));
+            admin.setAdminType(( Integer) claims.get("adminType"));
+            readerHolder.setReader(admin);
+        }
         return true;
     }
 
