@@ -17,9 +17,13 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/readers")
+@CrossOrigin(origins = "*")
 public class ReaderController {
     @Autowired
     private UserService userService;
+
+    @Resource
+    private ReaderHolder readerHolder;
 
     //分页查询用户信息
     @GetMapping("/page/list")
@@ -63,7 +67,7 @@ public class ReaderController {
     }
 
     //用户登录
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Result login(@RequestBody Reader reader){
         log.info("用户登录:{}", reader);
         Reader u = userService.login(reader);
@@ -79,5 +83,11 @@ public class ReaderController {
         }
         //登录失败返回错误信息
         return Result.error("用户名或密码错误");
+    }
+
+    @GetMapping("/me")
+    public Result me(){
+        Reader reader = (Reader) readerHolder.getReader();
+        return Result.success(reader);
     }
 }

@@ -17,6 +17,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin(origins = "*")
 public class AdminController {
 
     @Autowired
@@ -25,7 +26,7 @@ public class AdminController {
     @Resource
     private ReaderHolder readerHolder;
     //管理员登录
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Result login(@RequestBody Admin admin){
         log.info("管理员登录:{}",admin);
         Admin a = adminService.login(admin);
