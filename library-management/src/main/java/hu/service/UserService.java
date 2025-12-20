@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service//标记服务类
 public interface UserService {
     //根据id分页查找用户
-    PageBean page(Integer page, Integer pageSize, Integer id);
+    PageBean page(Integer page, Integer pageSize, Reader reader);
 
     //根据id删除用户
     void delete(Integer readerId);

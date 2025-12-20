@@ -34,12 +34,12 @@ public class UserServiceImpl implements UserService {
     private BookMapper bookMapper;
 
     @Override
-    public PageBean page(Integer page, Integer pageSize, Integer id) {
+    public PageBean page(Integer page, Integer pageSize, Reader reader) {
         //设置分页参数
         PageHelper.startPage(page,pageSize);
 
         //执行查询
-        List<Reader> readerList = userMapper.list(id);
+        List<Reader> readerList = userMapper.list(reader);
 
         //获取分页结果
         Page<Reader> p = (Page<Reader>) readerList;

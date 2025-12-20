@@ -26,13 +26,13 @@ public class ReaderController {
     private ReaderHolder readerHolder;
 
     //分页查询用户信息
-    @GetMapping("/page/list")
+    @PostMapping("/page/list")
     public Result page(@RequestParam(defaultValue = "1") Integer page,      //设定默认值
                        @RequestParam(defaultValue = "5") Integer pageSize,
-                       @RequestParam("readerId") Integer id){
-        log.info("分页查询,参数:{},{},{}",page,pageSize,id);
+                        @RequestBody Reader reader){
+        log.info("分页查询,参数:{},{},{}",page,pageSize,reader);
         //调用service进行分页查询操作
-        PageBean pageBean = userService.page(page,pageSize,id);
+        PageBean pageBean = userService.page(page,pageSize,reader);
         return Result.success(pageBean);
     }
 

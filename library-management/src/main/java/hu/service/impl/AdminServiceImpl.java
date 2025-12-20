@@ -1,11 +1,18 @@
 package hu.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import hu.mapper.AdminMapper;
 import hu.pojo.Admin;
+import hu.pojo.PageBean;
+import hu.pojo.Result;
+import hu.query.AdminQuery;
 import hu.service.AdminService;
 import hu.utils.HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -29,5 +36,21 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public int delete(Integer adminId) {
         return adminMapper.delete(adminId);
+    }
+
+    /**
+     * 分页查询
+     * @param page
+     * @param pageSize
+     * @param admin
+     * @return
+     */
+    @Override
+    public Result page(Integer page, Integer pageSize, AdminQuery admin) {
+        PageHelper.startPage(page,pageSize);
+        List<Admin> adminList = adminMapper.list(admin);
+        Page<Admin> p = (Page<Admin>) adminList;
+        PageBean pageBean = new PageBean(p.getTotal(),p.getResult());
+        return Result.success(pageBean);
     }
 }

@@ -8,8 +8,23 @@
     <select id="list" resultType="hu.pojo.Reader">
         select * from readers
         <where>
-            <if test="readerId != null">
-                reader_id = #{readId}
+            <if test="readerId != null and readerId !=''">
+                reader_id = #{readerId}
+            </if>
+            <if test="readerName != null and readerName != ''">
+                and reader_name = #{readerName}
+            </if>
+            <if test="readerType != null and readerType != ''">
+                and reader_type = #{readerType}
+            </if>
+            <if test="department != null and department != ''">
+                and department = #{department}
+            </if>
+            <if test="phoneNumber != null and phoneNumber != ''">
+                and phone_number = #{phoneNumber}
+            </if>
+            <if test="status == 1 or status == 0">
+                and status = #{status}
             </if>
         </where>
     </select>

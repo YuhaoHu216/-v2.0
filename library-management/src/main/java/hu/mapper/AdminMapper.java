@@ -1,10 +1,13 @@
 package hu.mapper;
 
 import hu.pojo.Admin;
+import hu.query.AdminQuery;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper//将接口生成动态代理类
 public interface AdminMapper {
@@ -17,4 +20,7 @@ public interface AdminMapper {
 
     @Delete("delete from admin where admin_id = #{adminId}")
     int delete(Integer adminId);
+
+    // 分类查询
+    List<Admin> list(AdminQuery admin);
 }

@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper//将接口生成动态代理类
 public interface UserMapper {
     //用户分页查询
-    List<Reader> list(Integer id);
+    List<Reader> list(Reader reader);
 
     //删除用户
     @Delete("delete from readers where reader_id = #{readerId}")

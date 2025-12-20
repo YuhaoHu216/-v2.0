@@ -3,6 +3,7 @@ package hu.controller;
 
 import hu.pojo.Admin;
 import hu.pojo.Result;
+import hu.query.AdminQuery;
 import hu.service.AdminService;
 import hu.utils.JwtUtils;
 import hu.utils.ReaderHolder;
@@ -59,6 +60,14 @@ public class AdminController {
             return Result.success("添加成功");
         }
         return Result.error("添加失败");
+    }
+
+    @PostMapping("/page/list")
+    public Result page(@RequestParam(defaultValue = "1") Integer page,      //设定默认值
+                       @RequestParam(defaultValue = "5") Integer pageSize,
+                       @RequestBody AdminQuery admin){
+        log.info("分页查询管理员:{}",admin);
+        return adminService.page(page,pageSize,admin);
     }
 
 
