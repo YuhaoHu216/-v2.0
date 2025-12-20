@@ -3,6 +3,7 @@ package hu.controller;
 import hu.pojo.PageBean;
 import hu.pojo.Result;
 import hu.pojo.Reader;
+import hu.query.ReaderQuery;
 import hu.service.UserService;
 import hu.utils.JwtUtils;
 import hu.utils.ReaderHolder;
@@ -27,12 +28,11 @@ public class ReaderController {
 
     //分页查询用户信息
     @PostMapping("/page/list")
-    public Result page(@RequestParam(defaultValue = "1") Integer page,      //设定默认值
-                       @RequestParam(defaultValue = "5") Integer pageSize,
-                        @RequestBody Reader reader){
-        log.info("分页查询,参数:{},{},{}",page,pageSize,reader);
+    public Result page(
+                        @RequestBody ReaderQuery readerQuery){
+        log.info("分页查询,参数:{}",readerQuery);
         //调用service进行分页查询操作
-        PageBean pageBean = userService.page(page,pageSize,reader);
+        PageBean pageBean = userService.page(readerQuery);
         return Result.success(pageBean);
     }
 
@@ -59,7 +59,7 @@ public class ReaderController {
     }
 
     //用户注册
-    @GetMapping("/register")
+    @PostMapping("/register")
     public Result register(@RequestBody Reader reader){
         log.info("用户注册,用户:{}", reader);
         userService.register(reader);

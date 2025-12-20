@@ -3,11 +3,12 @@ package hu.service;
 import hu.pojo.PageBean;
 import hu.pojo.Reader;
 import hu.pojo.Result;
+import hu.query.ReaderQuery;
 import org.springframework.stereotype.Service;
 @Service//标记服务类
 public interface UserService {
     //根据id分页查找用户
-    PageBean page(Integer page, Integer pageSize, Reader reader);
+    PageBean page(ReaderQuery readerQuery);
 
     //根据id删除用户
     void delete(Integer readerId);

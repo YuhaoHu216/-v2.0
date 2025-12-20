@@ -1,6 +1,7 @@
 package hu.mapper;
 
 import hu.pojo.Reader;
+import hu.query.ReaderQuery;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 @Mapper//将接口生成动态代理类
 public interface UserMapper {
     //用户分页查询
-    List<Reader> list(Reader reader);
+    List<Reader> list(ReaderQuery readerQuery);
 
     //删除用户
     @Delete("delete from readers where reader_id = #{readerId}")

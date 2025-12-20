@@ -23,6 +23,9 @@
             <if test="phoneNumber != null and phoneNumber != ''">
                 and phone_number = #{phoneNumber}
             </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
             <if test="status == 1 or status == 0">
                 and status = #{status}
             </if>

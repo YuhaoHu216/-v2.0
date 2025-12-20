@@ -9,6 +9,7 @@ import hu.pojo.Book;
 import hu.pojo.PageBean;
 import hu.pojo.Reader;
 import hu.pojo.Result;
+import hu.query.ReaderQuery;
 import hu.service.UserService;
 import hu.utils.ReaderHolder;
 import jakarta.annotation.Resource;
@@ -34,12 +35,12 @@ public class UserServiceImpl implements UserService {
     private BookMapper bookMapper;
 
     @Override
-    public PageBean page(Integer page, Integer pageSize, Reader reader) {
+    public PageBean page(ReaderQuery  query) {
         //设置分页参数
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(query.getPage(),query.getPageSize());
 
         //执行查询
-        List<Reader> readerList = userMapper.list(reader);
+        List<Reader> readerList = userMapper.list(query);
 
         //获取分页结果
         Page<Reader> p = (Page<Reader>) readerList;
