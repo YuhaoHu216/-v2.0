@@ -2,11 +2,9 @@ package hu.mapper;
 
 import hu.pojo.Admin;
 import hu.query.AdminQuery;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Mapper//将接口生成动态代理类
@@ -23,4 +21,7 @@ public interface AdminMapper {
 
     // 分类查询
     List<Admin> list(AdminQuery admin);
+
+    @Update("update admin set last_login = #{now} where username = #{username}")
+    void updateLastLogin(String username,  LocalDate now);
 }

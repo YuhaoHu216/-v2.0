@@ -14,7 +14,7 @@
             <if test="readerName != null and readerName != ''">
                 and reader_name = #{readerName}
             </if>
-            <if test="readerType != null and readerType != ''">
+            <if test="readerType == 0 or (readerType != null and readerType != '')">
                 and reader_type = #{readerType}
             </if>
             <if test="department != null and department != ''">

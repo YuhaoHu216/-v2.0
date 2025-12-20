@@ -12,6 +12,7 @@ import hu.utils.HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -24,6 +25,8 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public Admin login(Admin admin) {
         admin.setPassword(HashUtil.md5(admin.getPassword()));
+        // 修改last_login
+        adminMapper.updateLastLogin(admin.getUsername(), LocalDate.now());
         return adminMapper.getByAdminNameAndPassword(admin);
     }
 
