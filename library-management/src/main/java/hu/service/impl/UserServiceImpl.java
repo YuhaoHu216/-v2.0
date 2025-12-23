@@ -87,10 +87,13 @@ public class UserServiceImpl implements UserService {
     //还书
     @Override
     @Transactional
-    public Result drop(Integer bookId) {
+    public Result drop(String bookTitle,Integer readerId) {
         // 获取登录用户信息
-        Reader reader = (Reader) readerHolder.getReader();
+        Reader reader = new  Reader();
+        reader.setReaderId(readerId);
         Reader r = userMapper.getById(reader);
+        // 获取bookId
+        Integer bookId = bookMapper.getIdByTitle(bookTitle);
         // 读者信息更新
         r.setCurrentBorrowCount(r.getCurrentBorrowCount() - 1);
         userMapper.drop(r.getReaderId());

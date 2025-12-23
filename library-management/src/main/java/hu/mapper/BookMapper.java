@@ -40,4 +40,7 @@ public interface BookMapper {
     // 归还书籍
     @Update("update books set available_copies = available_copies + 1 where book_id = #{bookId}")
     void drop(Integer bookId);
+
+    @Select("select book_id from books where title = #{bookTitle}")
+    Integer getIdByTitle(String bookTitle);
 }
